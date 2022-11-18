@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Vector2 movement;                                                                
     [SerializeField] float speed = 5f;
     [SerializeField] InputReader inputReader;
+    [SerializeField] PlayerData playerData;
 
     void Awake()
     {
@@ -21,9 +22,15 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
+        playerData.ResetPlayerPosition();
         inputReader.OnMovement += e => movement = e;         
     }
-   
+
+    private void Update()
+    {
+        playerData.PlayerPosition = player.position;
+    }
+
     void FixedUpdate()
     {
         
