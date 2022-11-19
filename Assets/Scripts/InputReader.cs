@@ -1,31 +1,36 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Threading;
 using UnityEngine;
 using UnityEngine.InputSystem;
+
 [CreateAssetMenu]
 public class InputReader : ScriptableObject, PlayerInput.IPlayerControlsActions
 {
     PlayerInput playerInput;
 
-    public event Action<Vector2> OnMovement;
+    public event Action<Vector2> MoveInputEvent;
+    public event Action JumpInputEvent;
+    public event Action JumpInputCancelledEvent;
+    
     public void OnMove(InputAction.CallbackContext context)
     {
-        
-        switch (context.phase) 
+        switch (context.phase)
         {
             case InputActionPhase.Performed:
-                OnMovement?.Invoke(context.ReadValue<Vector2>());
+                MoveInputEvent?.Invoke(context.ReadValue<Vector2>());
                 break;
             case InputActionPhase.Canceled:
-                OnMovement?.Invoke(Vector2.zero);
+                MoveInputEvent?.Invoke(Vector2.zero);
                 break;
-
         }
     }
 
-
+    public void OnJump(InputAction.CallbackContext context)
+    {
+        if(context.phase == InputActionPhase.Performed)
+            JumpInputEvent?.Invoke();
+        else
+            JumpInputCancelledEvent?.Invoke();
+    }
 
     void OnEnable()
     {
