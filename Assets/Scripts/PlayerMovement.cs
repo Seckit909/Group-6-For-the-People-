@@ -26,10 +26,11 @@ public class PlayerMovement : MonoBehaviour
 
     [Space, Header("Submergence")]
     [SerializeField] float submergenceOffset = .5f;
-    [SerializeField, Min(.1f)] float submergenceRange = 1f;
     [SerializeField] float submergence;
-    [SerializeField] float waterDrag = 1f;
-    
+    [SerializeField, Min(.1f)] float submergenceRange = 1f;
+    [SerializeField, Min(0f)] float buoyancy = 1f;
+    [SerializeField, Range(0f,10f)] float waterDrag = 1f;
+
     [Space, Header("Physics")]
     [SerializeField] Vector2 upAxis;
     [SerializeField] Vector2 rightAxis;
@@ -41,6 +42,8 @@ public class PlayerMovement : MonoBehaviour
     
     Animator anim;
     Rigidbody2D playerRigidbody;
+    
+    const float GUARD_AGAINST_INVALID_SUBMERGENCE_VALUE = 1f;
     
     bool OnGround => groundContactCount > 0;
     bool OnSteep => steepContactCount > 0;
@@ -82,20 +85,20 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        UpdateState();
-        UpdateVelocity();
-        EvaluateJump();
-        UpdateRigidbodyVelocity();
-        
         playerData.PlayerPosition = playerRigidbody.position;
+        
+        UpdateState();
         
         if (InWater)
             velocity *= 1f - waterDrag * submergence * Time.deltaTime;
         
+        CalculateVelocity();
+        EvaluateJump();
+        UpdateRigidbodyVelocity();
         ClearState();
     }
     
-    void UpdateVelocity()
+    void CalculateVelocity()
     {
         Vector2 xAxis = ProjectDirectionOnPlane(rightAxis, groundContactNormal);
         Vector2 yAxis = ProjectDirectionOnPlane(upAxis, groundContactNormal);
@@ -114,7 +117,13 @@ public class PlayerMovement : MonoBehaviour
     
     void UpdateRigidbodyVelocity()
     {
-        velocity += Physics2D.gravity * Time.deltaTime;
+        if (InWater)
+            velocity += Physics2D.gravity * ((1f - buoyancy * submergence) * Time.deltaTime);
+        else if (OnGround && velocity.sqrMagnitude < .01f)
+            velocity += groundContactNormal * Vector2.Dot(Physics2D.gravity, groundContactNormal) * Time.deltaTime;
+        else
+            velocity += Physics2D.gravity * Time.deltaTime;
+        
         playerRigidbody.velocity = velocity;
     }
 
@@ -142,14 +151,16 @@ public class PlayerMovement : MonoBehaviour
         if ((waterLayer & (1 << other.gameObject.layer)) != 0)
             EvaluateSubmergence();
     }
-
+    
     void EvaluateSubmergence()
     {
         var origin = playerRigidbody.position + upAxis * submergenceOffset;
 
-        RaycastHit2D hit = Physics2D.Raycast(origin, -upAxis, submergenceRange, waterLayer);
-        if(hit)
+        RaycastHit2D hit = Physics2D.Raycast(origin, -upAxis, submergenceRange + GUARD_AGAINST_INVALID_SUBMERGENCE_VALUE, waterLayer);
+        if (hit)
             submergence = 1f - hit.distance / submergenceRange;
+        else
+            submergence = 1f;
     }
 
     bool hasJumpInput;
@@ -165,11 +176,6 @@ public class PlayerMovement : MonoBehaviour
         inputReader.JumpInputEvent -= OnJumpInput;
         inputReader.JumpInputCancelledEvent -= OnJumpInputCancelled;
     }
-
-    // HEREFTER :: MÅSKE UNØDVENDIG
-    //
-    //
-    //
 
     [SerializeField] LayerMask groundProbeMask = -1;
     [SerializeField] LayerMask stairProbeMask = -1;
@@ -269,7 +275,7 @@ public class PlayerMovement : MonoBehaviour
     
     bool SnapToGround()
     {
-        if (groundedPhysicsStepsSinceLast > 1 || jumpingPhysicsStepsSinceLast <= 2) return false;
+        if (groundedPhysicsStepsSinceLast > 1 || jumpingPhysicsStepsSinceLast <= 2 || InWater) return false;
 
         float speed = velocity.magnitude;
         if (speed > maxSnapToGroundSpeed) return false;

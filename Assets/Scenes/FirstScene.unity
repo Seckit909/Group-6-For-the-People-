@@ -1048,9 +1048,10 @@ MonoBehaviour:
   maxGroundAngle: 25
   maxStairAngle: 50
   submergenceOffset: 0.5
-  submergenceRange: 1
   submergence: 0
-  waterDrag: 1
+  submergenceRange: 1
+  buoyancy: 1
+  waterDrag: 10
   upAxis: {x: 0, y: 0}
   rightAxis: {x: 0, y: 0}
   desiredVelocity: {x: 0, y: 0}
