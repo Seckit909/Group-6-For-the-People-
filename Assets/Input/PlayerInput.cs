@@ -44,6 +44,51 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Descend"",
+                    ""type"": ""Button"",
+                    ""id"": ""f34b332e-8501-4d07-b519-ca6ab1ad8202"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DebugUI"",
+                    ""type"": ""Button"",
+                    ""id"": ""bc7dd082-2f3a-4aa8-b8b0-881a2e4910f1"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PauseMenuUI"",
+                    ""type"": ""Button"",
+                    ""id"": ""5f3256b2-6b58-41c4-b899-f6388fc02eb6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LeftMouse"",
+                    ""type"": ""Button"",
+                    ""id"": ""97b9fdef-eef6-4ce8-8850-6692a0ca6e3b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RightMouse"",
+                    ""type"": ""Button"",
+                    ""id"": ""b69ee2ad-9d36-43c1-a4ec-032f11c0f152"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -112,6 +157,61 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""544960ae-9baa-4a1f-9726-1ab8e5d5f148"",
+                    ""path"": ""<Keyboard>/ctrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard-Mouse"",
+                    ""action"": ""Descend"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a2a0aea4-13de-4768-9b65-2387818193b6"",
+                    ""path"": ""<Keyboard>/comma"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard-Mouse"",
+                    ""action"": ""PauseMenuUI"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6e690b3b-06e6-450f-b693-45ef2cca6447"",
+                    ""path"": ""<Keyboard>/period"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard-Mouse"",
+                    ""action"": ""DebugUI"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7d90f071-04d2-4ca7-b999-9db94c712b8d"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard-Mouse"",
+                    ""action"": ""LeftMouse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4a004658-9eb4-4047-9db7-16fac535de1d"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard-Mouse"",
+                    ""action"": ""RightMouse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -139,6 +239,11 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         m_PlayerControls = asset.FindActionMap("PlayerControls", throwIfNotFound: true);
         m_PlayerControls_Move = m_PlayerControls.FindAction("Move", throwIfNotFound: true);
         m_PlayerControls_Jump = m_PlayerControls.FindAction("Jump", throwIfNotFound: true);
+        m_PlayerControls_Descend = m_PlayerControls.FindAction("Descend", throwIfNotFound: true);
+        m_PlayerControls_DebugUI = m_PlayerControls.FindAction("DebugUI", throwIfNotFound: true);
+        m_PlayerControls_PauseMenuUI = m_PlayerControls.FindAction("PauseMenuUI", throwIfNotFound: true);
+        m_PlayerControls_LeftMouse = m_PlayerControls.FindAction("LeftMouse", throwIfNotFound: true);
+        m_PlayerControls_RightMouse = m_PlayerControls.FindAction("RightMouse", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -200,12 +305,22 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     private IPlayerControlsActions m_PlayerControlsActionsCallbackInterface;
     private readonly InputAction m_PlayerControls_Move;
     private readonly InputAction m_PlayerControls_Jump;
+    private readonly InputAction m_PlayerControls_Descend;
+    private readonly InputAction m_PlayerControls_DebugUI;
+    private readonly InputAction m_PlayerControls_PauseMenuUI;
+    private readonly InputAction m_PlayerControls_LeftMouse;
+    private readonly InputAction m_PlayerControls_RightMouse;
     public struct PlayerControlsActions
     {
         private @PlayerInput m_Wrapper;
         public PlayerControlsActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_PlayerControls_Move;
         public InputAction @Jump => m_Wrapper.m_PlayerControls_Jump;
+        public InputAction @Descend => m_Wrapper.m_PlayerControls_Descend;
+        public InputAction @DebugUI => m_Wrapper.m_PlayerControls_DebugUI;
+        public InputAction @PauseMenuUI => m_Wrapper.m_PlayerControls_PauseMenuUI;
+        public InputAction @LeftMouse => m_Wrapper.m_PlayerControls_LeftMouse;
+        public InputAction @RightMouse => m_Wrapper.m_PlayerControls_RightMouse;
         public InputActionMap Get() { return m_Wrapper.m_PlayerControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -221,6 +336,21 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @Jump.started -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnJump;
                 @Jump.performed -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnJump;
                 @Jump.canceled -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnJump;
+                @Descend.started -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnDescend;
+                @Descend.performed -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnDescend;
+                @Descend.canceled -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnDescend;
+                @DebugUI.started -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnDebugUI;
+                @DebugUI.performed -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnDebugUI;
+                @DebugUI.canceled -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnDebugUI;
+                @PauseMenuUI.started -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnPauseMenuUI;
+                @PauseMenuUI.performed -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnPauseMenuUI;
+                @PauseMenuUI.canceled -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnPauseMenuUI;
+                @LeftMouse.started -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnLeftMouse;
+                @LeftMouse.performed -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnLeftMouse;
+                @LeftMouse.canceled -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnLeftMouse;
+                @RightMouse.started -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnRightMouse;
+                @RightMouse.performed -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnRightMouse;
+                @RightMouse.canceled -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnRightMouse;
             }
             m_Wrapper.m_PlayerControlsActionsCallbackInterface = instance;
             if (instance != null)
@@ -231,6 +361,21 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
+                @Descend.started += instance.OnDescend;
+                @Descend.performed += instance.OnDescend;
+                @Descend.canceled += instance.OnDescend;
+                @DebugUI.started += instance.OnDebugUI;
+                @DebugUI.performed += instance.OnDebugUI;
+                @DebugUI.canceled += instance.OnDebugUI;
+                @PauseMenuUI.started += instance.OnPauseMenuUI;
+                @PauseMenuUI.performed += instance.OnPauseMenuUI;
+                @PauseMenuUI.canceled += instance.OnPauseMenuUI;
+                @LeftMouse.started += instance.OnLeftMouse;
+                @LeftMouse.performed += instance.OnLeftMouse;
+                @LeftMouse.canceled += instance.OnLeftMouse;
+                @RightMouse.started += instance.OnRightMouse;
+                @RightMouse.performed += instance.OnRightMouse;
+                @RightMouse.canceled += instance.OnRightMouse;
             }
         }
     }
@@ -248,5 +393,10 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
+        void OnDescend(InputAction.CallbackContext context);
+        void OnDebugUI(InputAction.CallbackContext context);
+        void OnPauseMenuUI(InputAction.CallbackContext context);
+        void OnLeftMouse(InputAction.CallbackContext context);
+        void OnRightMouse(InputAction.CallbackContext context);
     }
 }

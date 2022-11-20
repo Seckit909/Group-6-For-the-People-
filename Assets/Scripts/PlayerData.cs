@@ -9,6 +9,6 @@ public class PlayerData : ScriptableObject
 
     public Vector2 PlayerPosition { get => playerPosition; set => playerPosition = value; }
 
-    public void ResetPlayerPosition() => playerPosition = Vector2.zero;
+    public void ResetPlayerPositionData() => playerPosition = Vector2.zero;
 
 }
