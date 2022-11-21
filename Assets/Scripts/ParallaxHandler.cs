@@ -7,10 +7,16 @@ public class ParallaxHandler : MonoBehaviour
 {
     float startPosition;
     float length;
-    public Camera cam;
+    Camera cam;
 
     [SerializeField] bool loop;
     [SerializeField] float parallaxEffect;
+
+    private void Awake()
+    {
+        cam = Camera.main;
+    }
+
     void Start()
     {
         startPosition = transform.position.x;
