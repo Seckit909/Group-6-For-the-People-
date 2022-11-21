@@ -77,4 +77,9 @@ public class InputReader : ScriptableObject, PlayerInput.IPlayerControlsActions
     {
         PauseMenuEvent?.Invoke(context.performed);
     }
+
+    public static Vector2 GetMousePosition()
+    {
+        return Mouse.current.position.ReadValue();
+    }
 }
