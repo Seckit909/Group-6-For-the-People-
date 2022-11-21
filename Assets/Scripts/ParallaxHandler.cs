@@ -18,17 +18,18 @@ public class ParallaxHandler : MonoBehaviour
     }
     void Update()
     {
-        float distance = (cam.transform.position.x * parallaxEffect);
+        Vector3 camPos = cam.transform.position;
+        float distance = (camPos.x * parallaxEffect);
+        Vector3 pos = transform.position;
+        transform.position = (new Vector3(startPosition + distance, pos.y, pos.z));
 
-        transform.position = (new Vector3(startPosition + distance, transform.position.y, transform.position.z));
+        if (!loop)
+            return;
 
-        if (loop)
-        {
-            float temp = (cam.transform.position.x * (1 - parallaxEffect));
-            if (temp > startPosition + length)
-                startPosition += length;
-            else if (temp < startPosition - length)
-                startPosition -= length;
-        }
+        float temp = (camPos.x * (1 - parallaxEffect));
+        if (temp > startPosition + length)
+            startPosition += length;
+        else if (temp < startPosition - length)
+            startPosition -= length;
     }
 }
