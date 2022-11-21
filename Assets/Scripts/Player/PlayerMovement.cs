@@ -80,14 +80,15 @@ public class PlayerMovement : MonoBehaviour
     bool CanJumpWhenNotGrounded => CanJump && InWater;
 
     Vector2 PlayerPosition2D => new(transform.position.x, transform.position.y);
+
+    static bool HasLeftMouseInput => InputReader.GetMouseKeyValue() is 0;
+    static bool HasRightMouseInput => InputReader.GetMouseKeyValue() is 1;
+    static bool HasMiddleMouseInput => InputReader.GetMouseKeyValue() is 2;
     static Vector2 Gravity => Physics2D.gravity;
 
-    bool hasRightMouseInput;
-    
     void OnEnable()
     {
         inputReader.MoveInputEvent += v => moveInput.Set(v.x, v.y);
-        inputReader.RightMouseInputEvent += b => hasRightMouseInput = b;
         inputReader.JumpInputEvent += OnJumpInput;
         inputReader.JumpInputCancelledEvent += OnJumpInputCancelled;
     }
@@ -122,7 +123,7 @@ public class PlayerMovement : MonoBehaviour
     {
        CheckPlayerPosition();
        ClampInputVectorMagnitude(ref moveInput); 
-       if(hasRightMouseInput)
+       if(HasRightMouseInput)
            ClampInputVectorMagnitude(ref mouseMovementInput);
        CalculateDesiredVelocityVector();
        
@@ -407,7 +408,7 @@ public class PlayerMovement : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(mouseMovementInput, new Vector3(.2f, .2f, 0f));
 
-        if (!hasRightMouseInput) return;
+        if (!HasRightMouseInput) return;
         Gizmos.DrawRay(transform.position, new Vector3(mouseMovementInput.x, mouseMovementInput.y, 0f).normalized);
     }
 }

@@ -1,38 +1,38 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class ParallaxHandler : MonoBehaviour
 {
+    [SerializeField] bool doLoop = true;
+    [SerializeField] float parallaxEffect;
+    
     float startPosition;
     float length;
-    Camera cam;
-
-    [SerializeField] bool loop;
-    [SerializeField] float parallaxEffect;
-
-    private void Awake()
+    Camera mainCam;
+    SpriteRenderer spriteRenderer;
+    
+    Vector3 Position { get => transform.position; set => transform.position = value; }
+    
+    void Awake()
     {
-        cam = Camera.main;
+        mainCam = Camera.main;
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     void Start()
     {
         startPosition = transform.position.x;
-        length = GetComponent<SpriteRenderer>().bounds.size.x;
+        length = spriteRenderer.bounds.size.x;
     }
+    
     void Update()
     {
-        Vector3 camPos = cam.transform.position;
+        Vector3 camPos = mainCam.transform.position;
         float distance = (camPos.x * parallaxEffect);
-        Vector3 pos = transform.position;
-        transform.position = (new Vector3(startPosition + distance, pos.y, pos.z));
+        Position = new Vector3(startPosition + distance, Position.y, Position.z);
+        if (!doLoop) return;
 
-        if (!loop)
-            return;
-
-        float temp = (camPos.x * (1 - parallaxEffect));
+        float temp = camPos.x * (1 - parallaxEffect);
+        
         if (temp > startPosition + length)
             startPosition += length;
         else if (temp < startPosition - length)

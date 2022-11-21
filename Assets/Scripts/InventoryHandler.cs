@@ -1,7 +1,5 @@
 using UnityEngine;
 using TMPro;
-using UnityEngine.InputSystem;
-using Unity.VisualScripting;
 
 public class InventoryHandler : MonoBehaviour
 {
@@ -16,49 +14,47 @@ public class InventoryHandler : MonoBehaviour
     int redCollected = 0;
     int greenCollected = 0;
 
-    private void Awake()
+    void Awake()
     {
         cam = Camera.main;
     }
 
-    public void pinkCounter()
+    void PinkCounter()
     {
         pinkCollected += 1;
         pink.text = "" + pinkCollected;
     }
-    public void redCounter()
+    
+    void RedCounter()
     {
         redCollected += 1;
         red.text = "" + redCollected;
     }
-    public void greenCounter()
+    
+    void GreenCounter()
     {
         greenCollected += 1;
         green.text = "" + greenCollected;
     }
 
-    private void OnTriggerEnter2D(Collider2D point)
+    void OnTriggerEnter2D(Collider2D point)
     {
-        var mousePos = InputReader.GetMousePosition();
-        Debug.Log($"{mousePos}");
-
         if (point.gameObject.CompareTag("pink"))
         {
-            pinkCounter();
+            PinkCounter();
             Debug.Log("Yes it pink");
         }
 
         if (point.gameObject.CompareTag("red"))
         {
-            redCounter();
+            RedCounter();
             Debug.Log("Yes it red");
         }
         
         if (point.gameObject.CompareTag("green"))
         { 
-            greenCounter();
+            GreenCounter();
             Debug.Log("Yes it blue");
         }
-
     }
 }

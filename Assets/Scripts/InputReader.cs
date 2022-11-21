@@ -78,8 +78,13 @@ public class InputReader : ScriptableObject, PlayerInput.IPlayerControlsActions
         PauseMenuEvent?.Invoke(context.performed);
     }
 
-    public static Vector2 GetMousePosition()
+    public static Vector2 GetMousePosition() => Mouse.current.position.ReadValue();
+
+    public static int GetMouseKeyValue()
     {
-        return Mouse.current.position.ReadValue();
+        if (Mouse.current.leftButton.isPressed) return 0;
+        if (Mouse.current.rightButton.isPressed) return 1;
+        if (Mouse.current.middleButton.isPressed) return 2;
+        return -1;
     }
 }
