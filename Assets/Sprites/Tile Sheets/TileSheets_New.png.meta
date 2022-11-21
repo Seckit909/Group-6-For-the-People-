@@ -107,7 +107,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: TileSheets_New_0
+      name: Rock_TR
       rect:
         serializedVersion: 2
         x: 32
@@ -128,7 +128,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TileSheets_New_1
+      name: Rock_TM
       rect:
         serializedVersion: 2
         x: 64
@@ -149,7 +149,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TileSheets_New_2
+      name: Rock_T
       rect:
         serializedVersion: 2
         x: 96
@@ -170,7 +170,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TileSheets_New_3
+      name: Grass_TL
       rect:
         serializedVersion: 2
         x: 128
@@ -191,7 +191,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TileSheets_New_4
+      name: Grass_TM
       rect:
         serializedVersion: 2
         x: 160
@@ -212,7 +212,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TileSheets_New_5
+      name: Grass_TR
       rect:
         serializedVersion: 2
         x: 192
@@ -254,7 +254,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TileSheets_New_7
+      name: Rock_Base
       rect:
         serializedVersion: 2
         x: 64
@@ -317,7 +317,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TileSheets_New_10
+      name: Grass_Base
       rect:
         serializedVersion: 2
         x: 160
@@ -485,7 +485,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TileSheets_New_18
+      name: Sand_TL
       rect:
         serializedVersion: 2
         x: 32
@@ -506,7 +506,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TileSheets_New_19
+      name: Sand_TM
       rect:
         serializedVersion: 2
         x: 64
@@ -527,7 +527,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TileSheets_New_20
+      name: Sand_TR
       rect:
         serializedVersion: 2
         x: 96
@@ -853,39 +853,39 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       TileSheets_New_15: 1727759025
-      TileSheets_New_1: -1302024322
-      TileSheets_New_4: 548822558
       TileSheets_New_30: -1121361821
       TileSheets_New_9: -2100475487
-      TileSheets_New_10: 1853801292
-      TileSheets_New_19: -1012585753
+      Sand_TR: -80520311
+      Rock_TR: -243993763
       TileSheets_New_22: 1479539898
-      TileSheets_New_3: 1591394292
       TileSheets_New_33: -1487831876
       TileSheets_New_28: 1646064860
-      TileSheets_New_5: 706880595
-      TileSheets_New_20: -80520311
+      Rock_Base: 113766284
       TileSheets_New_27: 1318697409
-      TileSheets_New_0: -243993763
       TileSheets_New_8: -244806787
+      Grass_TR: 706880595
       TileSheets_New_13: -1818469201
       TileSheets_New_16: -813961521
-      TileSheets_New_2: 1949703468
       TileSheets_New_12: 224087536
       TileSheets_New_6: 930094118
       TileSheets_New_11: 213557502
       TileSheets_New_24: -1315917157
-      TileSheets_New_7: 113766284
-      TileSheets_New_14: 1680639785
       TileSheets_New_31: -1679833787
+      TileSheets_New_14: 1680639785
+      Grass_TM: 548822558
       TileSheets_New_21: -1080370896
+      Grass_Base: 1853801292
       TileSheets_New_17: -2145225133
       TileSheets_New_29: -1191772443
       TileSheets_New_32: -1569361339
       TileSheets_New_23: 1808759109
       TileSheets_New_34: -805829927
       TileSheets_New_26: 847517351
-      TileSheets_New_18: -4385194
+      Rock_T: 1949703468
+      Sand_TL: -4385194
+      Rock_TM: -1302024322
+      Grass_TL: 1591394292
+      Sand_TM: -1012585753
       TileSheets_New_25: -1266403597
   spritePackingTag: 
   pSDRemoveMatte: 0
