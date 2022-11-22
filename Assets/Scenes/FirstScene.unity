@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.21215841, g: 0.21215841, b: 0.21215841, a: 1}
+  m_IndirectSpecularColor: {r: 0.21264589, g: 0.21264589, b: 0.21264589, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -493,10 +493,10 @@ GameObject:
   - component: {fileID: 167152554}
   - component: {fileID: 167152557}
   - component: {fileID: 167152556}
-  - component: {fileID: 167152558}
+  - component: {fileID: 167152559}
   m_Layer: 0
   m_Name: pink
-  m_TagString: pink
+  m_TagString: Pollutant
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -610,7 +610,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &167152558
+--- !u!114 &167152559
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -619,9 +619,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 167152553}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e9334529aa4d8f4386b5ac5a07f1003, type: 3}
+  m_Script: {fileID: 11500000, guid: 7731dcca12d5f364493e22f9f3f4be3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pollutantData: {fileID: 11400000, guid: 22b1c028475699a41bbcbe2d9348c24e, type: 2}
+  playerInVicinity: 0
 --- !u!1 &172825378
 GameObject:
   m_ObjectHideFlags: 0
@@ -757,10 +759,9 @@ GameObject:
   - component: {fileID: 229621844}
   - component: {fileID: 229621847}
   - component: {fileID: 229621846}
-  - component: {fileID: 229621848}
   m_Layer: 0
   m_Name: red
-  m_TagString: red
+  m_TagString: Pollutant
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -874,18 +875,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &229621848
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 229621843}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e9334529aa4d8f4386b5ac5a07f1003, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &295033315
 GameObject:
   m_ObjectHideFlags: 0
@@ -2085,9 +2074,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pink: {fileID: 898805838}
-  red: {fileID: 0}
-  green: {fileID: 0}
-  pinkPlastic: {fileID: 167152553}
+  red: {fileID: 1142101815}
+  green: {fileID: 2089912706}
 --- !u!4 &732455200 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3848895572605888414, guid: 1dca32ca59839594dac00b62f20eec4d, type: 3}
@@ -2841,6 +2829,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1142101815 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5888911466069169557, guid: 136048b64098cdb4792da229bd5eb370, type: 3}
+  m_PrefabInstance: {fileID: 1613134430}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1198318157
 GameObject:
   m_ObjectHideFlags: 0
@@ -3129,6 +3128,14 @@ PrefabInstance:
     - target: {fileID: 2713563246781263798, guid: 136048b64098cdb4792da229bd5eb370, type: 3}
       propertyPath: m_Name
       value: Green Pollutant Resource Panel
+      objectReference: {fileID: 0}
+    - target: {fileID: 5888911466069169557, guid: 136048b64098cdb4792da229bd5eb370, type: 3}
+      propertyPath: m_text
+      value: NO DATA
+      objectReference: {fileID: 0}
+    - target: {fileID: 5888911466069169557, guid: 136048b64098cdb4792da229bd5eb370, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4278190335
       objectReference: {fileID: 0}
     - target: {fileID: 5888911467710820434, guid: 136048b64098cdb4792da229bd5eb370, type: 3}
       propertyPath: m_Color.b
@@ -4156,6 +4163,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Red Pollutant Resource Panel
       objectReference: {fileID: 0}
+    - target: {fileID: 5888911466069169557, guid: 136048b64098cdb4792da229bd5eb370, type: 3}
+      propertyPath: m_text
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5888911466069169557, guid: 136048b64098cdb4792da229bd5eb370, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4278190335
+      objectReference: {fileID: 0}
     - target: {fileID: 5888911467710820434, guid: 136048b64098cdb4792da229bd5eb370, type: 3}
       propertyPath: m_Color.b
       value: 0
@@ -4164,6 +4179,10 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.9960785
       objectReference: {fileID: 0}
+    - target: {fileID: 7623434332543788857, guid: 136048b64098cdb4792da229bd5eb370, type: 3}
+      propertyPath: data
+      value: 
+      objectReference: {fileID: 11400000, guid: 22b1c028475699a41bbcbe2d9348c24e, type: 2}
     - target: {fileID: 8776796010750369648, guid: 136048b64098cdb4792da229bd5eb370, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -5332,10 +5351,9 @@ GameObject:
   - component: {fileID: 1913240249}
   - component: {fileID: 1913240252}
   - component: {fileID: 1913240251}
-  - component: {fileID: 1913240253}
   m_Layer: 0
   m_Name: green
-  m_TagString: green
+  m_TagString: Pollutant
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5449,18 +5467,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &1913240253
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1913240248}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e9334529aa4d8f4386b5ac5a07f1003, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1931092009
 GameObject:
   m_ObjectHideFlags: 0
@@ -8754,6 +8760,17 @@ PrefabInstance:
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 1dca32ca59839594dac00b62f20eec4d, type: 3}
+--- !u!114 &2089912706 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5888911466069169557, guid: 136048b64098cdb4792da229bd5eb370, type: 3}
+  m_PrefabInstance: {fileID: 1292409641}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2109667050
 GameObject:
   m_ObjectHideFlags: 0
@@ -9016,6 +9033,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5888911466069169557, guid: 136048b64098cdb4792da229bd5eb370, type: 3}
       propertyPath: m_text
+      value: NO DATA
+      objectReference: {fileID: 0}
+    - target: {fileID: 5888911466069169557, guid: 136048b64098cdb4792da229bd5eb370, type: 3}
+      propertyPath: m_fontColor.r
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5888911467710820434, guid: 136048b64098cdb4792da229bd5eb370, type: 3}
