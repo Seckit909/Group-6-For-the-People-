@@ -1,5 +1,4 @@
 ﻿using System;
-using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,21 +7,22 @@ public abstract class PollutantBase : MonoBehaviour
     [SerializeField] protected PollutantData pollutantData;
     [SerializeField] protected bool playerInVicinity;
 
-    public static event Action<PollutantData> OnPollutantDataUpdated;
+    public static event Action<PollutantType> OnPollutantCollected;
 
     public bool PlayerInVicinity { set => playerInVicinity = value; }
 
-
+    protected abstract PollutantType PollutantType { get; }
+    
     void OnMouseDown()
     {
-        OnDerivedMouseDown();
+        if (!Mouse.current.leftButton.wasPressedThisFrame) return;
+        CollectPollutant();   
     }
 
-    protected abstract void OnDerivedMouseDown();
+    protected abstract void CollectPollutant();
 
-    protected void RaisePollutantDataUpdated()
+    protected void RaiseCollectPollutant(PollutantType pollutant)
     {
-        pollutantData.ResourceCount += 1;
-        OnPollutantDataUpdated?.Invoke(pollutantData);
+        OnPollutantCollected?.Invoke(pollutant);
     }
 }

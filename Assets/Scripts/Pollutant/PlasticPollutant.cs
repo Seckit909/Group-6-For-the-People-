@@ -1,6 +1,6 @@
-﻿public class OilSpillPollutant : PollutantBase
+public class PlasticPollutant : PollutantBase
 {
-    protected override PollutantType PollutantType => PollutantType.OilSpill;
+    protected override PollutantType PollutantType => PollutantType.Plastic;
 
     protected override void CollectPollutant()
     {

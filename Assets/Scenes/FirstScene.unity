@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.21264589, g: 0.21264589, b: 0.21264589, a: 1}
+  m_IndirectSpecularColor: {r: 0.21215841, g: 0.21215841, b: 0.21215841, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -759,6 +759,7 @@ GameObject:
   - component: {fileID: 229621844}
   - component: {fileID: 229621847}
   - component: {fileID: 229621846}
+  - component: {fileID: 229621848}
   m_Layer: 0
   m_Name: red
   m_TagString: Pollutant
@@ -875,6 +876,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &229621848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 229621843}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e9334529aa4d8f4386b5ac5a07f1003, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pollutantData: {fileID: 11400000, guid: 905ac80a43bb5f048bf595ab88c0bc7d, type: 2}
+  playerInVicinity: 0
 --- !u!1 &295033315
 GameObject:
   m_ObjectHideFlags: 0
@@ -3149,6 +3164,10 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.24705884
       objectReference: {fileID: 0}
+    - target: {fileID: 7623434332543788857, guid: 136048b64098cdb4792da229bd5eb370, type: 3}
+      propertyPath: pollutantType
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8776796010750369648, guid: 136048b64098cdb4792da229bd5eb370, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -4165,7 +4184,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5888911466069169557, guid: 136048b64098cdb4792da229bd5eb370, type: 3}
       propertyPath: m_text
-      value: 0
+      value: NO DATA
       objectReference: {fileID: 0}
     - target: {fileID: 5888911466069169557, guid: 136048b64098cdb4792da229bd5eb370, type: 3}
       propertyPath: m_fontColor32.rgba
@@ -4182,7 +4201,11 @@ PrefabInstance:
     - target: {fileID: 7623434332543788857, guid: 136048b64098cdb4792da229bd5eb370, type: 3}
       propertyPath: data
       value: 
-      objectReference: {fileID: 11400000, guid: 22b1c028475699a41bbcbe2d9348c24e, type: 2}
+      objectReference: {fileID: 11400000, guid: 905ac80a43bb5f048bf595ab88c0bc7d, type: 2}
+    - target: {fileID: 7623434332543788857, guid: 136048b64098cdb4792da229bd5eb370, type: 3}
+      propertyPath: pollutantType
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8776796010750369648, guid: 136048b64098cdb4792da229bd5eb370, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -9033,7 +9056,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5888911466069169557, guid: 136048b64098cdb4792da229bd5eb370, type: 3}
       propertyPath: m_text
-      value: NO DATA
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5888911466069169557, guid: 136048b64098cdb4792da229bd5eb370, type: 3}
       propertyPath: m_fontColor.r
@@ -9047,6 +9070,10 @@ PrefabInstance:
       propertyPath: data
       value: 
       objectReference: {fileID: 11400000, guid: 22b1c028475699a41bbcbe2d9348c24e, type: 2}
+    - target: {fileID: 7623434332543788857, guid: 136048b64098cdb4792da229bd5eb370, type: 3}
+      propertyPath: pollutantType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8776796010750369648, guid: 136048b64098cdb4792da229bd5eb370, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

@@ -8,12 +8,16 @@ public class PollutantDataUI : MonoBehaviour
 	[SerializeField] RectTransform textGameObject;
 	[SerializeField] PollutantData data;
 
-	[SerializeField] TMP_Text tMPText;
+	[SerializeField] Sprite pollutantIcon;
+	[SerializeField] TMP_Text textMeshProText;
+	
+	PollutantType pollutantType;
 
 	void OnValidate()
 	{
 		if (!data)
 		{
+			pollutantType = PollutantType.NONE;
 			if(imageGameObject)
 				imageGameObject.GetComponent<Image>().sprite = null;
 			if (!textGameObject) return;
@@ -23,6 +27,7 @@ public class PollutantDataUI : MonoBehaviour
 		}
 		else
 		{
+			pollutantType = data.PollutantType;
 			if(imageGameObject)
 				imageGameObject.GetComponent<Image>().sprite = data.Icon;
 			if (!textGameObject) return;
@@ -32,25 +37,33 @@ public class PollutantDataUI : MonoBehaviour
 		}
 	}
 
-	private void Awake()
+	void Awake()
 	{
-		tMPText = textGameObject.GetComponent<TMP_Text>();
+		textMeshProText = GetComponentInChildren<TMP_Text>();
+		pollutantIcon = GetComponentInChildren<Image>().sprite;
+	}
+
+	void Start()
+	{
+		if (!data) return;
+		if (!pollutantIcon) return;
+		pollutantIcon = data.Icon;
 	}
 
 	void OnEnable()
 	{
-		PollutantBase.OnPollutantDataUpdated += UpdatePollutantUI;
-		OnValidate();
+		PollutantBase.OnPollutantCollected += UpdatePollutantUI;
+		//OnValidate();
 	}
 
 	void OnDisable()
 	{
-		PollutantBase.OnPollutantDataUpdated -= UpdatePollutantUI;
+		PollutantBase.OnPollutantCollected -= UpdatePollutantUI;
 	}
 
-	void UpdatePollutantUI(PollutantData data)
+	void UpdatePollutantUI(PollutantType type)
 	{
-		Debug.Log($"{data} updated");
-		tMPText.text = data.ResourceCount.ToString();
+		if (type != pollutantType) return;
+		textMeshProText.text = data.ResourceCount.ToString();
 	}
 }
