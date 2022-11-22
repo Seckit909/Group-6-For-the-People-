@@ -8,6 +8,8 @@ public class PollutantDataUI : MonoBehaviour
 	[SerializeField] RectTransform textGameObject;
 	[SerializeField] PollutantData data;
 
+	[SerializeField] TMP_Text tMPText;
+
 	void OnValidate()
 	{
 		if (!data)
@@ -30,8 +32,25 @@ public class PollutantDataUI : MonoBehaviour
 		}
 	}
 
+	private void Awake()
+	{
+		tMPText = textGameObject.GetComponent<TMP_Text>();
+	}
+
 	void OnEnable()
-	{ 
+	{
+		PollutantBase.OnPollutantDataUpdated += UpdatePollutantUI;
 		OnValidate();
+	}
+
+	void OnDisable()
+	{
+		PollutantBase.OnPollutantDataUpdated -= UpdatePollutantUI;
+	}
+
+	void UpdatePollutantUI(PollutantData data)
+	{
+		Debug.Log($"{data} updated");
+		tMPText.text = data.ResourceCount.ToString();
 	}
 }
