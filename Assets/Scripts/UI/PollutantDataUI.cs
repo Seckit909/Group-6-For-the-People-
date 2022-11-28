@@ -10,32 +10,38 @@ public class PollutantDataUI : MonoBehaviour
 
 	[SerializeField] Sprite pollutantIcon;
 	[SerializeField] TMP_Text textMeshProText;
-	
-	PollutantType pollutantType;
 
-	void OnValidate()
+	public TMP_Text TextMeshProText => textMeshProText;
+
+	PollutantType pollutantType;
+	public Sprite PollutantIcon
 	{
-		if (!data)
-		{
-			pollutantType = PollutantType.NONE;
-			if(imageGameObject)
-				imageGameObject.GetComponent<Image>().sprite = null;
-			if (!textGameObject) return;
-			var tmpText = textGameObject.GetComponent<TMP_Text>();
-			tmpText.color = Color.red;
-			tmpText.text = "NO DATA";
-		}
-		else
-		{
-			pollutantType = data.PollutantType;
-			if(imageGameObject)
-				imageGameObject.GetComponent<Image>().sprite = data.Icon;
-			if (!textGameObject) return;
-			var tmpText = textGameObject.GetComponent<TMP_Text>();
-			tmpText.color = Color.black;
-			tmpText.text = data.ResourceCount.ToString();
-		}
-	}
+		get => pollutantIcon;
+		set => pollutantIcon = value;
+	}  
+	// void OnValidate()
+	// {
+	// 	if (!data)
+	// 	{
+	// 		pollutantType = PollutantType.NONE;
+	// 		if(imageGameObject)
+	// 			imageGameObject.GetComponent<Image>().sprite = null;
+	// 		if (!textGameObject) return;
+	// 		var tmpText = textGameObject.GetComponent<TMP_Text>();
+	// 		tmpText.color = Color.red;
+	// 		tmpText.text = "NO DATA";
+	// 	}
+	// 	else
+	// 	{
+	// 		pollutantType = data.PollutantType;
+	// 		if(imageGameObject)
+	// 			imageGameObject.GetComponent<Image>().sprite = data.Icon;
+	// 		if (!textGameObject) return;
+	// 		var tmpText = textGameObject.GetComponent<TMP_Text>();
+	// 		tmpText.color = Color.black;
+	// 		tmpText.text = data.ResourceCount.ToString();
+	// 	}
+	// }
 
 	void Awake()
 	{
