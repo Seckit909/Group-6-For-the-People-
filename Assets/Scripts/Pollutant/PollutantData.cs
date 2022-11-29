@@ -1,50 +1,44 @@
 using UnityEngine;
 
-[CreateAssetMenu]
-public class PollutantData : ScriptableObject
+namespace P106.Main.Pollutant
 {
-	[SerializeField] int resourceCount;
-	[Tooltip("64x64 sprite")]
-	[SerializeField] Sprite resourceIcon;
-	[SerializeField] PollutantType pollutantType;
-
-	public int ResourceCount { get => resourceCount; set => resourceCount = value; }
-	public Sprite Icon => resourceIcon;
-	public PollutantType PollutantType => pollutantType;
-	
-	void OnValidate()
+	[CreateAssetMenu(fileName = "New Pollutant Data", menuName = "P106/Data/Pollutant")]
+	public class PollutantData : ScriptableObject
 	{
-		if (pollutantType is not PollutantType.NONE) return;
-		Debug.LogError($"PollutantData {name} har ikke sat en gyldig pollutantType. Lige nu er den NONE. Det går sgu ikke.", this);
-	}
+		[SerializeField] int resourceCount;
+		[SerializeField] Sprite resourceIcon;
+		[SerializeField] PollutantType pollutantType;
 
-	void OnEnable()
-	{
-		PollutantBase.OnPollutantCollected += CollectPollutant;
-		ResetData();
-	}
+		public int ResourceCount { get => resourceCount; set => resourceCount = value; }
+		public Sprite Icon => resourceIcon;
+		public PollutantType PollutantType => pollutantType;
 
-	void OnDisable()
-	{
-		PollutantBase.OnPollutantCollected -= CollectPollutant;
-	}
+		void OnValidate()
+		{
+			if (pollutantType is not PollutantType.NONE) return;
+			Debug.LogError($"PollutantData {name} har ikke en gyldig pollutantType. Lige nu er den NONE. Det går sgu ikke.", this);
+		}
 
-	void ResetData()
-	{
-		resourceCount = 0;
-	}
-	
-	void CollectPollutant(PollutantType type)
-	{
-		if (type != pollutantType) return;
-		resourceCount += 1;
-	}
-}
+		void OnEnable()
+		{
+			PollutantBase.OnPollutantCollected += CollectPollutant;
+			ResetData();
+		}
 
-public enum PollutantType
-{
-	NONE,
-	OilSpill,
-	Plastic,
-	Ammonia
+		void OnDisable()
+		{
+			PollutantBase.OnPollutantCollected -= CollectPollutant;
+		}
+
+		void ResetData()
+		{
+			resourceCount = 0;
+		}
+
+		void CollectPollutant(PollutantType type)
+		{
+			if (type != pollutantType) return;
+			resourceCount += 1;
+		}
+	}
 }

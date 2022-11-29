@@ -1,14 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu]
-public class PlayerData : ScriptableObject
+namespace P106.Main.Player
 {
-    Vector2 playerPosition;
+	[CreateAssetMenu(menuName = "P106/Data/Player")]
+	public class PlayerData : ScriptableObject
+	{
+		Vector2 playerPosition;
 
-    public Vector2 PlayerPosition { get => playerPosition; set => playerPosition = value; }
+		public Vector2 PlayerPosition { get => playerPosition; set => playerPosition = value; }
 
-    public void ResetPlayerPositionData() => playerPosition = Vector2.zero;
-
+		public void ResetPlayerPositionData() => playerPosition = Vector2.zero;
+	}
 }

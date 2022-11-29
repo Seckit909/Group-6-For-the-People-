@@ -1,75 +1,51 @@
+using P106.Main.Pollutant;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PollutantDataUI : MonoBehaviour
+namespace P106.Main.UI
 {
-	[SerializeField] RectTransform imageGameObject;
-	[SerializeField] RectTransform textGameObject;
-	[SerializeField] PollutantData data;
-
-	[SerializeField] Sprite pollutantIcon;
-	[SerializeField] TMP_Text textMeshProText;
-
-	public TMP_Text TextMeshProText => textMeshProText;
-
-	PollutantType pollutantType;
-	public Sprite PollutantIcon
+	public class PollutantDataUI : MonoBehaviour
 	{
-		get => pollutantIcon;
-		set => pollutantIcon = value;
-	}  
-	// void OnValidate()
-	// {
-	// 	if (!data)
-	// 	{
-	// 		pollutantType = PollutantType.NONE;
-	// 		if(imageGameObject)
-	// 			imageGameObject.GetComponent<Image>().sprite = null;
-	// 		if (!textGameObject) return;
-	// 		var tmpText = textGameObject.GetComponent<TMP_Text>();
-	// 		tmpText.color = Color.red;
-	// 		tmpText.text = "NO DATA";
-	// 	}
-	// 	else
-	// 	{
-	// 		pollutantType = data.PollutantType;
-	// 		if(imageGameObject)
-	// 			imageGameObject.GetComponent<Image>().sprite = data.Icon;
-	// 		if (!textGameObject) return;
-	// 		var tmpText = textGameObject.GetComponent<TMP_Text>();
-	// 		tmpText.color = Color.black;
-	// 		tmpText.text = data.ResourceCount.ToString();
-	// 	}
-	// }
+		[SerializeField] RectTransform imageGameObject;
+		[SerializeField] RectTransform textGameObject;
+		[SerializeField] PollutantData data;
 
-	void Awake()
-	{
-		textMeshProText = GetComponentInChildren<TMP_Text>();
-		pollutantIcon = GetComponentInChildren<Image>().sprite;
-	}
+		[SerializeField] Sprite pollutantIcon;
+		[SerializeField] TMP_Text textMeshProText;
 
-	void Start()
-	{
-		if (!data) return;
-		if (!pollutantIcon) return;
-		pollutantIcon = data.Icon;
-	}
+		PollutantType pollutantType;
 
-	void OnEnable()
-	{
-		PollutantBase.OnPollutantCollected += UpdatePollutantUI;
-		//OnValidate();
-	}
+		public Sprite PollutantIcon { get => pollutantIcon; set => pollutantIcon = value; }
+		public TMP_Text TextMeshProText => textMeshProText;
 
-	void OnDisable()
-	{
-		PollutantBase.OnPollutantCollected -= UpdatePollutantUI;
-	}
+		void OnEnable()
+		{
+			PollutantBase.OnPollutantCollected += UpdatePollutantUI;
+		}
 
-	void UpdatePollutantUI(PollutantType type)
-	{
-		if (type != pollutantType) return;
-		textMeshProText.text = data.ResourceCount.ToString();
+		void OnDisable()
+		{
+			PollutantBase.OnPollutantCollected -= UpdatePollutantUI;
+		}
+		
+		void Awake()
+		{
+			textMeshProText = GetComponentInChildren<TMP_Text>();
+			pollutantIcon = GetComponentInChildren<Image>().sprite;
+		}
+
+		void Start()
+		{
+			if (!data) return;
+			if (!pollutantIcon) return;
+			pollutantIcon = data.Icon;
+		}
+
+		void UpdatePollutantUI(PollutantType type)
+		{
+			if (type != pollutantType) return;
+			textMeshProText.text = data.ResourceCount.ToString();
+		}
 	}
 }
