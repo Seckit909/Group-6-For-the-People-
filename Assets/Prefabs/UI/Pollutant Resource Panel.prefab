@@ -60,9 +60,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 892fd0764501433f964a2b637ceb7cc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  imageGameObject: {fileID: 5888911467710820435}
-  textGameObject: {fileID: 5888911466069169559}
   data: {fileID: 0}
+  imageComponent: {fileID: 5888911467710820434}
+  textMeshProText: {fileID: 5888911466069169557}
 --- !u!1 &3212238008108961535
 GameObject:
   m_ObjectHideFlags: 0

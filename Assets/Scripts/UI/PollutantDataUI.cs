@@ -7,17 +7,33 @@ namespace P106.Main.UI
 {
 	public class PollutantDataUI : MonoBehaviour
 	{
-		[SerializeField] RectTransform imageGameObject;
-		[SerializeField] RectTransform textGameObject;
 		[SerializeField] PollutantData data;
-
-		[SerializeField] Sprite pollutantIcon;
+		[SerializeField] Image imageComponent;
 		[SerializeField] TMP_Text textMeshProText;
 
 		PollutantType pollutantType;
 
-		public Sprite PollutantIcon { get => pollutantIcon; set => pollutantIcon = value; }
-		public TMP_Text TextMeshProText => textMeshProText;
+		public Sprite SpriteIcon
+		{
+			get
+			{
+				imageComponent ??= GetComponentInChildren<Image>();
+				return imageComponent.sprite;
+			}
+			set
+			{
+				imageComponent ??= GetComponentInChildren<Image>();
+				imageComponent.sprite = value;
+			}
+		}
+
+		public int PollutantCount
+		{
+			get => int.TryParse(textMeshProText.text, out int count) 
+				? count 
+				: -1;
+			set => textMeshProText.text = value.ToString("n0");
+		}
 
 		void OnEnable()
 		{
@@ -31,15 +47,15 @@ namespace P106.Main.UI
 		
 		void Awake()
 		{
-			textMeshProText = GetComponentInChildren<TMP_Text>();
-			pollutantIcon = GetComponentInChildren<Image>().sprite;
+			textMeshProText ??= GetComponentInChildren<TMP_Text>();
+			imageComponent ??= GetComponentInChildren<Image>();
 		}
 
 		void Start()
 		{
 			if (!data) return;
-			if (!pollutantIcon) return;
-			pollutantIcon = data.Icon;
+			if (!imageComponent) return;
+			SpriteIcon = data.Icon;
 		}
 
 		void UpdatePollutantUI(PollutantType type)

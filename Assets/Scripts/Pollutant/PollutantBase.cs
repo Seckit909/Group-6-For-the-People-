@@ -60,7 +60,7 @@ namespace P106.Main.Pollutant
 
                 (pos.x, pos.y, pos.x) = (smoothPos.x, smoothPos.y, 0f);
                 transform.position = pos;
-                break;
+                return;
             }
         }
 
