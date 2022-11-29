@@ -1,11 +1,14 @@
-public class PlasticPollutant : PollutantBase
+namespace P106.Main.Pollutant
 {
-    protected override PollutantType PollutantType => PollutantType.Plastic;
-
-    protected override void CollectPollutant()
+    public class PlasticPollutant : PollutantBase
     {
-        if (!playerInVicinity) return;
-        RaiseCollectPollutant(PollutantType);
-        Destroy(gameObject);
+        public override PollutantType PollutantType => PollutantType.Plastic;
+
+        protected override void CollectPollutant()
+        {
+            if (!playerInVicinity) return;
+            RaiseCollectPollutant(PollutantType);
+            Destroy(gameObject);
+        }
     }
 }

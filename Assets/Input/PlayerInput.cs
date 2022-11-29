@@ -89,6 +89,15 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MouseDrag"",
+                    ""type"": ""Value"",
+                    ""id"": ""b94d7aba-6f10-4eac-8713-f0747f488417"",
+                    ""expectedControlType"": ""Delta"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -212,6 +221,39 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""action"": ""RightMouse"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""One Modifier"",
+                    ""id"": ""83d26936-735b-43fb-af37-50af4ceef89c"",
+                    ""path"": ""OneModifier"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MouseDrag"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""576ad3cd-58ff-42a9-a4fc-ad3ce27b6246"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard-Mouse"",
+                    ""action"": ""MouseDrag"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""binding"",
+                    ""id"": ""99366687-67ce-4df5-9d9b-2da8f95086c3"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard-Mouse"",
+                    ""action"": ""MouseDrag"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -244,6 +286,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         m_PlayerControls_PauseMenuUI = m_PlayerControls.FindAction("PauseMenuUI", throwIfNotFound: true);
         m_PlayerControls_LeftMouse = m_PlayerControls.FindAction("LeftMouse", throwIfNotFound: true);
         m_PlayerControls_RightMouse = m_PlayerControls.FindAction("RightMouse", throwIfNotFound: true);
+        m_PlayerControls_MouseDrag = m_PlayerControls.FindAction("MouseDrag", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -310,6 +353,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerControls_PauseMenuUI;
     private readonly InputAction m_PlayerControls_LeftMouse;
     private readonly InputAction m_PlayerControls_RightMouse;
+    private readonly InputAction m_PlayerControls_MouseDrag;
     public struct PlayerControlsActions
     {
         private @PlayerInput m_Wrapper;
@@ -321,6 +365,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         public InputAction @PauseMenuUI => m_Wrapper.m_PlayerControls_PauseMenuUI;
         public InputAction @LeftMouse => m_Wrapper.m_PlayerControls_LeftMouse;
         public InputAction @RightMouse => m_Wrapper.m_PlayerControls_RightMouse;
+        public InputAction @MouseDrag => m_Wrapper.m_PlayerControls_MouseDrag;
         public InputActionMap Get() { return m_Wrapper.m_PlayerControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -351,6 +396,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @RightMouse.started -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnRightMouse;
                 @RightMouse.performed -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnRightMouse;
                 @RightMouse.canceled -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnRightMouse;
+                @MouseDrag.started -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnMouseDrag;
+                @MouseDrag.performed -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnMouseDrag;
+                @MouseDrag.canceled -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnMouseDrag;
             }
             m_Wrapper.m_PlayerControlsActionsCallbackInterface = instance;
             if (instance != null)
@@ -376,6 +424,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @RightMouse.started += instance.OnRightMouse;
                 @RightMouse.performed += instance.OnRightMouse;
                 @RightMouse.canceled += instance.OnRightMouse;
+                @MouseDrag.started += instance.OnMouseDrag;
+                @MouseDrag.performed += instance.OnMouseDrag;
+                @MouseDrag.canceled += instance.OnMouseDrag;
             }
         }
     }
@@ -398,5 +449,6 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         void OnPauseMenuUI(InputAction.CallbackContext context);
         void OnLeftMouse(InputAction.CallbackContext context);
         void OnRightMouse(InputAction.CallbackContext context);
+        void OnMouseDrag(InputAction.CallbackContext context);
     }
 }
